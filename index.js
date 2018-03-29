@@ -7,12 +7,12 @@ const program = require('commander')
 program
   .version('0.0.1')
   .option('-p, --port [number]', 'Server listen port, default 80', '80')
-  .option('-t, --target [host:port]', 'target, default 127.0.0.1:8080', '127.0.0.1:8080')
+  .option('-t, --target [host:port]', 'target, default 127.0.0.1:8888', '127.0.0.1:8888')
   .parse(process.argv)
 
 const target = program.target;
 const tHost = target.replace(/^.*:\/\//, '').replace(/\/.*/, '').replace(/:.*/, '') || '127.0.0.1';
-const tPort = (target.match(/:(\d{1,5})/) || [])[1] || '8080';
+const tPort = (target.match(/:(\d{1,5})/) || [])[1] || '8888';
 
 const proxy = httpProxy.createProxyServer({ ws: true, target: { host: tHost, port: tPort } });
 
